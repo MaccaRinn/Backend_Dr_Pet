@@ -5,16 +5,17 @@ import com.example.dr_pet.DTO.Request.ProductRequest;
 import com.example.dr_pet.DTO.Response.ProductResponse;
 import com.example.dr_pet.model.Category;
 import com.example.dr_pet.model.Product;
+import com.example.dr_pet.model.Supplier;
 import com.example.dr_pet.repo.CategoryRepo;
 import com.example.dr_pet.repo.ProductRepo;
+import com.example.dr_pet.repo.SupplierRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,6 +26,9 @@ public class ProductService {
 
     @Autowired
     private CategoryRepo categoryRepo;
+
+    @Autowired
+    private SupplierRepo supplierRepo;
 
 
     //list all product to response
@@ -65,10 +69,17 @@ public class ProductService {
     }
 
     public ProductResponse updateProduct(Long productId, ProductRequest request){
+        // get category by id
+        Category category = categoryRepo.findByCategoryIDAndIsActiveTrue(request.getCategoryId()).orElseThrow(() -> new RuntimeException("Category not found with id: " + request.getCategoryId()));
+
+        Supplier supplier = supplierRepo.findBySupplierIDAndIsActiveTrue(request.getSupplierId()).orElseThrow(() -> new RuntimeException("Supplier not found with id: " + request.getSupplierId()));
+
         Product product = productRepo.findByProductIDAndIsActiveTrue(productId).orElseThrow(() -> new RuntimeException("Product not found with id: " + productId));
+
         product.setName(request.getName());
         product.setDescription(request.getDescription());
-        product.setCategory(request.getCategory());
+        product.setCategory(category);
+        product.setSupplier(supplier);
         product.setImageURl(request.getImageURL());
         product.setQuantity(request.getQuantity());
         product.setPrice(request.getPrice());
@@ -79,10 +90,18 @@ public class ProductService {
 
 
     public ProductResponse addProduct(ProductRequest request) {
+
+
+        Category category = categoryRepo.findByCategoryIDAndIsActiveTrue(request.getCategoryId()).orElseThrow(() -> new RuntimeException("Category not found with id: " + request.getCategoryId()));
+
+        Supplier supplier = supplierRepo.findBySupplierIDAndIsActiveTrue(request.getSupplierId()).orElseThrow(() -> new RuntimeException("Supplier not found with id: " + request.getSupplierId()));
+
         Product product = new Product();
+
         product.setName(request.getName());
         product.setDescription(request.getDescription());
-        product.setCategory(request.getCategory());
+        product.setCategory(category);
+        product.setSupplier(supplier);
         product.setImageURl(request.getImageURL());
         product.setQuantity(request.getQuantity());
         product.setPrice(request.getPrice());

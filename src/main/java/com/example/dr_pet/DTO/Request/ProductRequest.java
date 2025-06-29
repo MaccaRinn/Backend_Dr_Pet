@@ -16,6 +16,6 @@ public class ProductRequest {
     private String imageURL;
     private Float price;
     private Integer quantity;
-    private Category category;
-    private Supplier supplier;
+    private Long categoryId;
+    private Long supplierId;
 }
