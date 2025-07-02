@@ -4,10 +4,12 @@ package com.example.dr_pet.controller;
 import com.example.dr_pet.DTO.Request.ProductRequest;
 import com.example.dr_pet.DTO.Response.ProductResponse;
 import com.example.dr_pet.model.Product;
+import com.example.dr_pet.model.UserPrincipal;
 import com.example.dr_pet.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
