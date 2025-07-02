@@ -22,6 +22,7 @@ public class Schedule {
     private String title;
     private String description;
     private boolean isActive;
+    private String Status;
 
 //    @ManyToOne
 //    @JoinColumn(name = "petID")

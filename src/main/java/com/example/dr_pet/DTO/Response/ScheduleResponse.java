@@ -18,6 +18,8 @@ public class ScheduleResponse {
     private LocalDateTime DateTime;
 
     private String description;
+    private String title;
+    private String Status;
 
 //    private Pet pet;
     private Account Account;

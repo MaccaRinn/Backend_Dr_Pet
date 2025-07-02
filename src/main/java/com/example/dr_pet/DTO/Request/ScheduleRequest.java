@@ -20,4 +20,9 @@ public class ScheduleRequest {
     private String description;
     @NotBlank(message = "Title must not be empty")
     private String title;
+    @NotBlank(message = "Status must not be empty")
+    private String status;
+
+
+
 }

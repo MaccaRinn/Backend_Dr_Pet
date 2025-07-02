@@ -5,13 +5,13 @@ import com.example.dr_pet.DTO.Request.ScheduleRequest;
 import com.example.dr_pet.DTO.Response.ScheduleResponse;
 import com.example.dr_pet.model.Schedule;
 import com.example.dr_pet.repo.AccountRepo;
-import com.example.dr_pet.repo.PetRepo;
 import com.example.dr_pet.repo.ScheduleRepo;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import org.hibernate.validator.internal.IgnoreForbiddenApisErrors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
@@ -30,20 +30,23 @@ public class ScheduleService {
         dto.setScheduleID(schedule.getScheduleID());
         dto.setDateTime(schedule.getDateTime());
         dto.setDescription(schedule.getDescription());
+        dto.setTitle(schedule.getTitle());
+        dto.setStatus(schedule.getStatus());
         dto.setAccount(schedule.getAccount());
         return dto;
     }
-
 
     public ScheduleResponse addSchedule(ScheduleRequest request, String username){
         Schedule schedule = new Schedule();
         schedule.setDateTime(request.getDateTime());
         schedule.setDescription(request.getDescription());
+        schedule.setTitle(request.getTitle());
+        schedule.setStatus(request.getStatus());
+        schedule.setActive(true);
         schedule.setAccount(accountRepo.findByUsernameAndIsActiveTrue(username).orElseThrow(()->new RuntimeException("Account not found")));
         scheduleRepo.save(schedule);
         return mapToScheduleResponse(schedule);
     }
-
 
     public List<ScheduleResponse> getAllSchedule(String username) {
         List<Schedule> schedules = scheduleRepo.findByAccountAndIsActiveTrue(accountRepo.findByUsernameAndIsActiveTrue(username).orElseThrow(()->new RuntimeException("Account not found")));
@@ -56,11 +59,12 @@ public class ScheduleService {
         scheduleRepo.save(schedule);
     }
 
-
     public void updateSchedule(Long scheduleId, @Valid ScheduleRequest request) {
         Schedule schedule = scheduleRepo.findByScheduleIDAndIsActiveTrue(scheduleId).orElseThrow(()->new RuntimeException("Schedule not found"));
         schedule.setDateTime(request.getDateTime());
         schedule.setDescription(request.getDescription());
+        schedule.setTitle(request.getTitle());
+        schedule.setStatus(request.getStatus());
         scheduleRepo.save(schedule);
     }
 
@@ -68,9 +72,6 @@ public class ScheduleService {
         Schedule schedule = scheduleRepo.findByScheduleIDAndIsActiveTrue(scheduleId).orElseThrow(()->new RuntimeException("Schedule not found"));
         return mapToScheduleResponse(schedule);
     }
-
-
-
 
 
 }
