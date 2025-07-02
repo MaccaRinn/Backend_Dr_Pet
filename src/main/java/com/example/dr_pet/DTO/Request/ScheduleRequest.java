@@ -18,6 +18,6 @@ public class ScheduleRequest {
     private LocalDateTime DateTime;
     @NotBlank(message = "Description must not be empty")
     private String description;
-    @NotNull(message = "Pet ID must not be empty")
-    private Long petId;
+    @NotBlank(message = "Title must not be empty")
+    private String title;
 }

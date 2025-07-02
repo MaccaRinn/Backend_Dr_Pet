@@ -23,9 +23,6 @@ public class ScheduleService {
     private ScheduleRepo scheduleRepo;
 
     @Autowired
-    private PetRepo petRepo;
-
-    @Autowired
     private AccountRepo accountRepo;
 
     private ScheduleResponse mapToScheduleResponse(Schedule schedule){
@@ -33,7 +30,6 @@ public class ScheduleService {
         dto.setScheduleID(schedule.getScheduleID());
         dto.setDateTime(schedule.getDateTime());
         dto.setDescription(schedule.getDescription());
-        dto.setPet(schedule.getPet());
         dto.setAccount(schedule.getAccount());
         return dto;
     }
@@ -43,7 +39,6 @@ public class ScheduleService {
         Schedule schedule = new Schedule();
         schedule.setDateTime(request.getDateTime());
         schedule.setDescription(request.getDescription());
-        schedule.setPet(petRepo.findByPetIDAndIsActiveTrue(request.getPetId()).orElseThrow(()->new RuntimeException("Pet not found")));
         schedule.setAccount(accountRepo.findByUsernameAndIsActiveTrue(username).orElseThrow(()->new RuntimeException("Account not found")));
         scheduleRepo.save(schedule);
         return mapToScheduleResponse(schedule);
@@ -74,9 +69,8 @@ public class ScheduleService {
         return mapToScheduleResponse(schedule);
     }
 
-    public List<ScheduleResponse> getAllScheduleOfPet(Long petId) {
-        List<Schedule> schedules = scheduleRepo.findByPetAndIsActiveTrue(petRepo.findById(petId).orElseThrow(()->new RuntimeException("Pet not found")));
-        return schedules.stream().map(this::mapToScheduleResponse).toList();
-    }
+
+
+
 
 }

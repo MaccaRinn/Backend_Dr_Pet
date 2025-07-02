@@ -17,12 +17,15 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long scheduleID;
     private LocalDateTime DateTime;
+
+
+    private String title;
     private String description;
     private boolean isActive;
 
-    @ManyToOne
-    @JoinColumn(name = "petID")
-    private Pet pet;
+//    @ManyToOne
+//    @JoinColumn(name = "petID")
+//    private Pet pet;
 
     @ManyToOne
     @JoinColumn(name = "accountID")

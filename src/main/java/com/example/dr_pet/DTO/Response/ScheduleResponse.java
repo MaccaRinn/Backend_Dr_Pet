@@ -16,7 +16,9 @@ public class ScheduleResponse {
 
     private Long scheduleID;
     private LocalDateTime DateTime;
+
     private String description;
-    private Pet pet;
+
+//    private Pet pet;
     private Account Account;
 }

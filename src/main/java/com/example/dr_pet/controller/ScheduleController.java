@@ -64,15 +64,15 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleResponse);
     }
 
-    //all by pet
-    @GetMapping("all/pet/{petId}")
-    public ResponseEntity<?> getAllScheduleOfPet(@PathVariable Long petId){
-        List<ScheduleResponse> listSchedule = scheduleService.getAllScheduleOfPet(petId);
-        if (listSchedule.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Empty List");
-        }
-        return ResponseEntity.ok(listSchedule);
-    }
+//    //all by pet
+//    @GetMapping("all/pet/{petId}")
+//    public ResponseEntity<?> getAllScheduleOfPet(@PathVariable Long petId){
+//        List<ScheduleResponse> listSchedule = scheduleService.getAllScheduleOfPet(petId);
+//        if (listSchedule.isEmpty()) {
+//            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Empty List");
+//        }
+//        return ResponseEntity.ok(listSchedule);
+//    }
 
 
     //delete
@@ -101,12 +101,6 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
         }
     }
-
-
-
-
-
-
 
 
 }
