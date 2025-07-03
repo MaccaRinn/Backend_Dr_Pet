@@ -16,9 +16,8 @@ public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long scheduleID;
-    private LocalDateTime DateTime;
-
-
+    private LocalDateTime start;
+    private LocalDateTime end;
     private String title;
     private String description;
     private boolean isActive;

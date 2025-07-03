@@ -13,16 +13,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ScheduleRequest {
-
-    @NotNull(message = "Date time must not be empty")
-    private LocalDateTime DateTime;
-    @NotBlank(message = "Description must not be empty")
-    private String description;
     @NotBlank(message = "Title must not be empty")
     private String title;
+    @NotNull(message = "Start time must not be empty")
+    private LocalDateTime start;
+    @NotNull(message = "End time must not be empty")
+    private LocalDateTime end;
+    @NotBlank(message = "Description must not be empty")
+    private String description;
     @NotBlank(message = "Status must not be empty")
     private String status;
-
-
 
 }

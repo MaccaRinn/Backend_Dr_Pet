@@ -15,12 +15,10 @@ import java.time.LocalDateTime;
 public class ScheduleResponse {
 
     private Long scheduleID;
-    private LocalDateTime DateTime;
-
-    private String description;
     private String title;
+    private LocalDateTime start;
+    private LocalDateTime end;
+    private String description;
     private String Status;
 
-//    private Pet pet;
-    private Account Account;
 }
