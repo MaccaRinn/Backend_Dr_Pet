@@ -19,6 +19,6 @@ public class ScheduleResponse {
     private LocalDateTime start;
     private LocalDateTime end;
     private String description;
-    private String Status;
+    private String status;
 
 }

@@ -28,8 +28,8 @@ public class ScheduleService {
     private ScheduleResponse mapToScheduleResponse(Schedule schedule){
         ScheduleResponse dto = new ScheduleResponse();
         dto.setScheduleID(schedule.getScheduleID());
-        dto.setStart(schedule.getStart());
-        dto.setEnd(schedule.getEnd());
+        dto.setStart(schedule.getStartDate());
+        dto.setEnd(schedule.getEndDate());
         dto.setDescription(schedule.getDescription());
         dto.setTitle(schedule.getTitle());
         dto.setStatus(schedule.getStatus());
@@ -38,8 +38,8 @@ public class ScheduleService {
 
     public ScheduleResponse addSchedule(ScheduleRequest request, String username){
         Schedule schedule = new Schedule();
-        schedule.setStart(request.getStart());
-        schedule.setEnd(request.getEnd());
+        schedule.setStartDate(request.getStart());
+        schedule.setEndDate(request.getEnd());
         schedule.setDescription(request.getDescription());
         schedule.setTitle(request.getTitle());
         schedule.setStatus(request.getStatus());
@@ -62,8 +62,8 @@ public class ScheduleService {
 
     public void updateSchedule(Long scheduleId, @Valid ScheduleRequest request) {
         Schedule schedule = scheduleRepo.findByScheduleIDAndIsActiveTrue(scheduleId).orElseThrow(()->new RuntimeException("Schedule not found"));
-        schedule.setStart(request.getStart());
-        schedule.setEnd(request.getEnd());
+        schedule.setStartDate(request.getStart());
+        schedule.setEndDate(request.getEnd());
         schedule.setDescription(request.getDescription());
         schedule.setTitle(request.getTitle());
         schedule.setStatus(request.getStatus());

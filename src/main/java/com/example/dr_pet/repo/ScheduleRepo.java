@@ -19,6 +19,4 @@ public interface ScheduleRepo extends JpaRepository <Schedule, Long>{
     List<Schedule> findByAccountAndIsActiveTrue(Account accountID);
 
 
-    List<Schedule> findByPetAndIsActiveTrue(Pet pet);
-
 }
